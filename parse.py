@@ -49,5 +49,6 @@ def parse_mrsid(bs, tp, wr, hd, sp):
 def parse_loc(bs, tp, wr, hd, sp):
   add_header(wr, hd, sp)
 
+  ## filling the content
   for i in bs.find(id=tp).find_all("a"):
     wr.write(i.get("href") + sp + i.string + "\n")
