@@ -2,8 +2,8 @@ FREELANCER.COM
 ==============
 http://goo.gl/jdzgh0
 
-Hi I'm new on web scraping and I need help to get all <code><a href></code> of each company
-from the list shown on this URL: 
+Hi I'm new on web scraping and I need help to get all    <a href>
+of each company from the list shown on this URL: 
 http://www.greenbook.org/market-research-companies/united-states-of-america. 
 Then I need to present it on a table. I need a code that will first get all 
 the url of each company and then those url I need to get the company name, 
