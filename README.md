@@ -20,13 +20,14 @@ DESCRIPTION
 
 TODO
 ----
-  * scrap list of companies from all sections with their info about company
+  * scrap list of companies and check if there is more than on one page
   * scrap detailed description of each company
 
 HOW TO RUN?
 ----------
   python homepage_scrap.py
+  python category_scrap.py
 
 UPDATE
 ------
-  19/03/2014
+  20/03/2014

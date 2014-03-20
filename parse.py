@@ -6,8 +6,10 @@
 # @author       Martin Kersner
 # @email        m.kersner@gmail.com
 # @date         19/03/2014
-# @last_update  19/03/2014
+# @last_update  20/03/2014
 ################################################################################
+
+import sys
 
 ################################################################################
 # Adds header inserted as parameter list to csv file 
@@ -36,7 +38,7 @@ def parse_mrsid(bs, tp, wr, hd, sp):
   ## filling the content
   for i in bs.find(id="searchSpecialties").find(id=tp).find_all("li"):
     ct = i.parent.parent.find_previous_sibling("div").contents[1].contents[1].strip()
-    wr.write(i.a.get("href") + sp + ct  + sp + i.a.string + "\n")
+    write_csv(wr, [i.a.get("href"), ct, i.a.string], sp)
 
 ################################################################################
 # Parses LOCATION from homepage
@@ -51,4 +53,39 @@ def parse_loc(bs, tp, wr, hd, sp):
 
   ## filling the content
   for i in bs.find(id=tp).find_all("a"):
-    wr.write(i.get("href") + sp + i.string + "\n")
+    write_csv(wr, [i.get("href"), i.string], sp)
+
+################################################################################
+# Prints continually strings from list to csv file using sp separator
+# @param  wr  writer csv
+# @param  ls  list of items to print
+# @param  sp  separator
+################################################################################
+def write_csv(wr, ls, sp):
+  ln = len(ls)
+
+  for i in range(0, ln):
+    try:
+      wr.write(ls[i])
+    except UnicodeEncodeError:
+      ## solves problems with character character u'\xbb'
+      wr.write(ls[i].encode('utf-8'))
+
+    ## prints separator or newline
+    if (i == ln-1):
+      wr.write("\n")
+    else:
+      wr.write(sp)
+
+################################################################################
+# Tries to open a file for reading
+# @param  nm  name of file to open
+# @param  md  mode of opening
+################################################################################
+def open_file(nm, md):
+  try:
+    return open(nm, md)
+  except IOError:
+    print >> sys.stderr, "Oops, " + nm + " probably does not exist!"
+    print >> sys.stderr, "Exiting."
+    exit()
