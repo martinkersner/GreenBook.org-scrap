@@ -25,8 +25,8 @@ TODO
 
 HOW TO RUN?
 ----------
-  python homepage_scrap.py
-  python category_scrap.py
+  * python homepage_scrap.py
+  * python category_scrap.py
 
 UPDATE
 ------
