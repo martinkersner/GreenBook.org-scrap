@@ -6,7 +6,7 @@
 # @author       Martin Kersner
 # @email        m.kersner@gmail.com
 # @date         20/03/2014
-# @last_update  20/03/2014
+# @last_update  21/03/2014
 ################################################################################
 
 import sys
@@ -15,12 +15,13 @@ import csv
 import requests
 from bs4 import BeautifulSoup
 import time
+from urlparse import parse_qs, urlparse
 from parse import *
 
 ## load links to categories
 csv_names = [ 
-    #mrsid_1, 
-    #mrsid_2, 
+    mrsid_1, 
+    mrsid_2, 
     mrsid_3,
     mrsid_4,
     mrsid_5,
@@ -54,6 +55,9 @@ for i in csv_names:
 
   # scrap
   for j in url:
+    j = "/market-research-firms/consulting-B2B"
+    #j = "/market-research-firms/tracking"
+    j = "/market-research-companies/canada"
     time.sleep(1)
     response = requests.get(website + j) 
     html = response.text
@@ -64,6 +68,23 @@ for i in csv_names:
 
     # add header
     write_csv(wr, ["url", "heading", "link", "telephone", "area"], sep)
+
+    # there are more subpages
+    if bs.find(class_="pagination") != None:
+      link_sbp = bs.find(class_="pagination").find(class_="pagination").ul.find_all("li")
+
+      # getting the last link item containing number of new urls
+      for en in range(0, len(link_sbp)):
+        url_sbp = link_sbp[en].a.get("href")
+
+      # parsing url query to get "page" and "rd"
+      pr = parse_qs(urlparse(url_sbp).query, keep_blank_values=True)
+      last_page = int(pr["page"][0])
+      char = pr["rd"][0]
+
+      for page in range(2, last_page+1):
+        new_sbp = j + "?page=" + str(page) + "&rd=" + char
+        url.append(new_sbp)
 
     for k in bs.find_all(class_="article-lrg"):
       try:
