@@ -20,7 +20,6 @@ DESCRIPTION
 
 TODO
 ----
-  * scrap list of companies and check if there is more than on one page
   * scrap detailed description of each company
 
 HOW TO RUN?
@@ -30,4 +29,4 @@ HOW TO RUN?
 
 UPDATE
 ------
-  20/03/2014
+  21/03/2014

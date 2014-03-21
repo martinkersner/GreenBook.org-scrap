@@ -7,7 +7,7 @@
 # @email        m.kersner@gmail.com
 # @date         20/03/2014
 # @last_update  21/03/2014
-################################################################################
+###############################################################################
 
 import sys
 from settings import *
@@ -20,18 +20,19 @@ from parse import *
 
 ## load links to categories
 csv_names = [ 
-    mrsid_1, 
-    mrsid_2, 
-    mrsid_3,
-    mrsid_4,
-    mrsid_5,
-    mrsid_6,
-    mrs_ctry,
-    mrs_state,
-    mrs_metro,
-    fcg_ctry,
-    fcg_state,
-    fcg_metro]
+    #mrsid_1, 
+    #mrsid_2, 
+    mrsid_3
+    #mrsid_4,
+    #mrsid_5,
+    #mrsid_6,
+    #mrs_ctry,
+    #mrs_state,
+    #mrs_metro,
+    #fcg_ctry,
+    #fcg_state,
+    #fcg_metro
+    ]
 
 for i in csv_names:
   ## process of scraping
@@ -79,6 +80,7 @@ for i in csv_names:
       last_page = int(pr["page"][0])
       char = pr["rd"][0]
 
+      # adding new subpages
       for page in range(2, last_page+1):
         new_sbp = j + "?page=" + str(page) + "&rd=" + char
         url.append(new_sbp)
