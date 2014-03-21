@@ -55,9 +55,6 @@ for i in csv_names:
 
   # scrap
   for j in url:
-    j = "/market-research-firms/consulting-B2B"
-    #j = "/market-research-firms/tracking"
-    j = "/market-research-companies/canada"
     time.sleep(1)
     response = requests.get(website + j) 
     html = response.text
