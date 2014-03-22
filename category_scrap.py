@@ -52,6 +52,7 @@ for i in csv_names:
   rd.close
 
   wr = open_file(i + category + ext, 'w')
+  write_csv(wr, ["url", "heading", "link", "telephone", "area"], sep)
 
   # scrap
   for j in url:
@@ -62,9 +63,6 @@ for i in csv_names:
 
     # prints info about scraping
     print j
-
-    # add header
-    write_csv(wr, ["url", "heading", "link", "telephone", "area"], sep)
 
     ## INSERTING NEW SUBPAGES FROM LINKS' LIST
     if  (bs.find(class_="pagination") != None) and (not(any(parse_qs(urlparse(j).query, keep_blank_values=True)))): 

@@ -110,13 +110,22 @@ def get_telephone(bs):
 # @param  bs  BeautifulSoup
 ###############################################################################
 def get_email_website(bs):
+  m = False
+  w = False
+  email = ""
+  website = ""
+
   em = bs.find_all("a")
   for i in em:
-    if i.get("itemprop") == "email":
+    if i.get("itemprop") == "email" and not m:
       email = i.string.strip()
-    else:
-      if i.get("itemprop") == "url":
-        website = i.string.strip()
+      m = True
+    elif i.get("itemprop") == "url" and not w:
+      website = i.get("href")
+      w = True
+
+    if m and w:
+      break;
 
   return email, website
 
@@ -146,3 +155,14 @@ def get_address(bs):
           ad[itemprop2] = k.string.strip()
 
   return ad
+
+###############################################################################
+# Gets description of company
+# @param  bs  BeautifulSoup
+###############################################################################
+def get_description(bs):
+  desc = str(bs.find(class_="entity-desc").p).replace('<br/>', ' ')
+  desc = desc.replace('\t', ' ')
+  desc = desc.replace('\n', ' ')
+  desc = desc.replace("<p itemprop=\"description\">", '')
+  return desc.replace("</p>", '').strip()

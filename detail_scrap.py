@@ -17,18 +17,20 @@ import requests
 from bs4 import BeautifulSoup
 
 csv_names = [ 
-    mrsid_1, 
-    mrsid_2, 
-    mrsid_3,
-    mrsid_4,
-    mrsid_5,
-    mrsid_6,
-    mrs_ctry,
-    mrs_state,
-    mrs_metro,
-    fcg_ctry,
+#    mrsid_1, 
+#    mrsid_2, 
+#    mrsid_3,
+#    mrsid_4,
+#    mrsid_5,
+#    mrsid_6,
+
+#mrs_ctry,
+#    mrs_state,
+#    mrs_metro,
+#    fcg_ctry,
     fcg_state,
-    fcg_metro]
+#    fcg_metro
+    ]
 
 url = []
 
@@ -65,7 +67,7 @@ for j in url:
   title = bs.h2.string.strip()
 
   ## description
-  description = bs.find(class_="entity-desc").p.string.strip().replace('\t', ' ')
+  description = get_description(bs)
 
   ## telephone
   telephone = get_telephone(bs)
@@ -74,7 +76,7 @@ for j in url:
   address = get_address(bs)
 
   ## email & url
-  email, website = get_email_website(bs)
+  email, web = get_email_website(bs)
 
   # print to csv file
   ls = [j, 
@@ -82,7 +84,7 @@ for j in url:
         description, 
         telephone, 
         email, 
-        website,
+        web,
         address["streetAddress"],
         address["addressLocality"],
         address["addressRegion"],
