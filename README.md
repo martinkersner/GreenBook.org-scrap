@@ -20,12 +20,14 @@ DESCRIPTION
 
 TODO
 ----
-  * scrap detailed description of each company
+  * test
+  * create database?
 
 HOW TO RUN?
 ----------
   * python homepage_scrap.py
   * python category_scrap.py
+  * python detail_scrap.py
 
 UPDATE
 ------

@@ -29,3 +29,5 @@ fcg_state = "FCG_STATE"
 fcg_metro = "FCG_METRO"
 
 category = "_cat"
+
+detail_company = "detail_company"
