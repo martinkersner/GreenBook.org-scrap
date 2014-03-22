@@ -161,8 +161,11 @@ def get_address(bs):
 # @param  bs  BeautifulSoup
 ###############################################################################
 def get_description(bs):
-  desc = str(bs.find(class_="entity-desc").p).replace('<br/>', ' ')
-  desc = desc.replace('\t', ' ')
-  desc = desc.replace('\n', ' ')
-  desc = desc.replace("<p itemprop=\"description\">", '')
-  return desc.replace("</p>", '').strip()
+  rpl = ["<br/>", "\t", "\n", "<p itemprop=\"description\">", "</p>"]
+
+  desc = str(bs.find(class_="entity-desc").p)
+
+  for r in rpl:
+    desc = desc.replace(r, ' ')
+
+  return desc.strip()

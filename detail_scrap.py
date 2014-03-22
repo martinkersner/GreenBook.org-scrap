@@ -17,20 +17,18 @@ import requests
 from bs4 import BeautifulSoup
 
 csv_names = [ 
-#    mrsid_1, 
-#    mrsid_2, 
-#    mrsid_3,
-#    mrsid_4,
-#    mrsid_5,
-#    mrsid_6,
-
-#mrs_ctry,
-#    mrs_state,
-#    mrs_metro,
-#    fcg_ctry,
+    mrsid_1, 
+    mrsid_2, 
+    mrsid_3,
+    mrsid_4,
+    mrsid_5,
+    mrsid_6,
+    mrs_ctry,
+    mrs_state,
+    mrs_metro,
+    fcg_ctry,
     fcg_state,
-#    fcg_metro
-    ]
+    fcg_metro]
 
 url = []
 
