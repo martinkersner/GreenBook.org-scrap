@@ -6,7 +6,7 @@
 # @author       Martin Kersner
 # @email        m.kersner@gmail.com
 # @date         20/03/2014
-# @last_update  21/03/2014
+# @last_update  22/03/2014
 ###############################################################################
 
 import sys
@@ -20,19 +20,18 @@ from parse import *
 
 ## load links to categories
 csv_names = [ 
-    #mrsid_1, 
-    #mrsid_2, 
-    mrsid_3
-    #mrsid_4,
-    #mrsid_5,
-    #mrsid_6,
-    #mrs_ctry,
-    #mrs_state,
-    #mrs_metro,
-    #fcg_ctry,
-    #fcg_state,
-    #fcg_metro
-    ]
+    mrsid_1, 
+    mrsid_2, 
+    mrsid_3,
+    mrsid_4,
+    mrsid_5,
+    mrsid_6,
+    mrs_ctry,
+    mrs_state,
+    mrs_metro,
+    fcg_ctry,
+    fcg_state,
+    fcg_metro]
 
 for i in csv_names:
   ## process of scraping
@@ -67,8 +66,11 @@ for i in csv_names:
     # add header
     write_csv(wr, ["url", "heading", "link", "telephone", "area"], sep)
 
-    # there are more subpages
-    if bs.find(class_="pagination") != None:
+    ## INSERTING NEW SUBPAGES FROM LINKS' LIST
+    if  (bs.find(class_="pagination") != None) and (not(any(parse_qs(urlparse(j).query, keep_blank_values=True)))): 
+          # page contains links to subpages
+          # first page of links' list
+
       link_sbp = bs.find(class_="pagination").find(class_="pagination").ul.find_all("li")
 
       # getting the last link item containing number of new urls
@@ -85,6 +87,7 @@ for i in csv_names:
         new_sbp = j + "?page=" + str(page) + "&rd=" + char
         url.append(new_sbp)
 
+    ## SCRAPING DETAILS OF COMPANIES FROM LIST
     for k in bs.find_all(class_="article-lrg"):
       try:
         heading = k.find(class_="strong").find("b").contents[0]
